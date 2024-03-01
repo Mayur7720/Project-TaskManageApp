@@ -12,7 +12,7 @@ function NoProjectSelected({ onStartClick }) {
       <div>
         <button
           onClick={onStartClick}
-          className="text-sans rounded bg-slate-800 text-stone-200 font-serif px-3 py-2  "
+          className="font-serif rounded bg-slate-800 text-stone-200  px-3 py-2 border-2 border-transparent hover:border-slate-400  "
         >
           Create Project
         </button>

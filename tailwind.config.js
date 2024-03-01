@@ -4,8 +4,12 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        poppins: [ "Playfair Display", "serif"],
-        customFont: ['"Custom Font"', "sans-serif"],
+        poppins: ["Playfair Display", "serif"],
+        customFont: ["Custom Font", "sans-serif"],
+        anta: ["Anta", "sans-serif"],
+        Basic: ["Basic", "sans-serif"],
+        micro: ["Kalnia", "serif"],
+        kode: ["Kode Mono", "monospace"],
       },
     },
   },
