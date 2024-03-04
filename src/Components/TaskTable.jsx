@@ -1,12 +1,11 @@
 import React, { useContext, useState } from "react";
 import { ProjectContext } from "../Contexts/ProjectContext";
 function TaskTable({ Projects }) {
-  // const { Projects, onEditTask, onInputChange, onSaveTask, onDeleteTask } =
-  //   useContext(ProjectContext);
+
   const { onEditTask, onInputChange, onSaveTask, onDeleteTask } =
     useContext(ProjectContext);
 
-  let classes = "border px-4 py-2";
+  let classes = "border-t  px-4 py-2 ";
 
   const InputChange = (projectID, taskID, field, value) => {
     onInputChange(projectID, taskID, field, value);
@@ -21,11 +20,51 @@ function TaskTable({ Projects }) {
     onDeleteTask(projectID, taskID);
   };
 
+  function renderSwitch(param) {
+    switch (param) {
+      case "done":
+        return (
+          <p className="rounded-xl w-3/4   ml-auto mr-auto bg-green-600 text-green-200 ">
+            Done
+          </p>
+        );
+
+      case "new":
+        return (
+          <p className="rounded-xl w-3/4   ml-auto mr-auto  bg-blue-500 text-blue-200">
+            New
+          </p>
+        );
+
+      case "unsigned":
+        return (
+          <p className="rounded-xl w-3/4   ml-auto mr-auto bg-amber-700 text-amber-200">
+            Unsigned
+          </p>
+        );
+
+      case "block":
+        return (
+          <p className="rounded-xl w-3/4   ml-auto mr-auto bg-red-600 text-red-200">
+            Block
+          </p>
+        );
+
+      case "pending":
+        return (
+          <p className="rounded-xl bg-orange-800 w-3/4   ml-auto mr-auto text-violet-200">
+            Pending
+          </p>
+        );
+      default:
+        return "No Selection";
+    }
+  }
   return (
     <section className="mt-5 rounded-xl w-full h-full bg-gray-700 text-center py-2">
-      <div className="backdrop-blur-lg bg-white/30 p-2 flex items-center rounded-xl justify-center py-4 mx-2 shadow-sm shadow-slate-100 z-10 ">
-        <table className=" table-auto w-full">
-          <thead>
+      <div className="backdrop-blur-lg bg-white/35 p-2 flex items-center rounded-xl justify-center py-4 mx-2 shadow-sm shadow-slate-100 z-10 ">
+        <table className=" table-auto w-full ">
+          <thead className="bg-slate-700 text-gray-300  ">
             <tr>
               <th className={classes + " font-semibold font-mono p-3 "}>
                 Task ID
@@ -37,9 +76,12 @@ function TaskTable({ Projects }) {
                 Task Description
               </th>
               <th className={classes + " font-semibold font-mono p-3 "}>
-                Final Date
+                Start Date
               </th>
               <th className={classes + " font-semibold font-mono p-3 "}>
+                End Date
+              </th>
+              <th className={classes + " font-semibold font-mono p-3  "}>
                 Status
               </th>
               <th className={classes + " font-semibold font-mono p-3 "}>
@@ -49,7 +91,7 @@ function TaskTable({ Projects }) {
           </thead>
           <tbody className="text-center ">
             {Projects.task.map((Task) => (
-              <tr key={Task.taskID}>
+              <tr key={Task.taskID} className="hover:bg-slate-500  ">
                 <td className={classes}>{Task.taskID}</td>
                 <td className={classes}>
                   {" "}
@@ -89,6 +131,7 @@ function TaskTable({ Projects }) {
                     Task.taskDescription
                   )}
                 </td>
+                <td className={classes}>{Task.taskStartDate}</td>
                 <td className={classes}>{Task.taskEndDate}</td>
                 <td className={classes}>
                   {Task.isEditing ? (
@@ -107,9 +150,10 @@ function TaskTable({ Projects }) {
                       <option value="block">Block</option>
                       <option value="done">Done</option>
                       <option value="unsigned">Unsigned</option>
+                      <option value="pending">Pending</option>
                     </select>
                   ) : (
-                    Task.taskStatus
+                    renderSwitch(Task.taskStatus)
                   )}
                 </td>
                 <td className={classes}>
@@ -145,134 +189,6 @@ function TaskTable({ Projects }) {
         </table>
       </div>
     </section>
-    // <section className="mt-5 rounded-xl w-full h-full bg-gray-700 text-center py-2">
-    //   {Projects.map((project) => (
-    //     <div
-    //       key={project.key}
-    //       className="backdrop-blur-lg bg-white/30 p-2 flex items-center rounded-xl justify-center py-4 mx-2 shadow-sm shadow-slate-100 z-10 "
-    //     >
-    //       <table className=" table-auto w-full">
-    //         <thead>
-    //           <tr>
-    //             <th className={classes + " font-semibold font-mono p-3 "}>
-    //               Task ID
-    //             </th>
-    //             <th className={classes + " font-semibold font-mono p-3 "}>
-    //               Task Title
-    //             </th>
-    //             <th className={classes + " font-semibold font-mono p-3 "}>
-    //               Start Date
-    //             </th>
-    //             <th className={classes + " font-semibold font-mono p-3 "}>
-    //               Final Date
-    //             </th>
-    //             <th className={classes + " font-semibold font-mono p-3 "}>
-    //               Status
-    //             </th>
-    //             <th className={classes + " font-semibold font-mono p-3 "}>
-    //               Actions
-    //             </th>
-    //           </tr>
-    //         </thead>
-    //         <tbody className="text-center ">
-    //           {project.task.map((task) => (
-    //             <tr key={task.taskID}>
-    //               <td className={classes}>{task.taskID}</td>
-    //               <td className={classes}>
-    //                 {" "}
-    //                 {task.isEditing ? (
-    //                   <input
-    //                     type="text"
-    //                     value={task.taskTitle}
-    //                     onChange={(e) =>
-    //                       InputChange(
-    //                         project.id,
-    //                         task.taskID,
-    //                         "taskTitle",
-    //                         e.target.value
-    //                       )
-    //                     }
-    //                   />
-    //                 ) : (
-    //                   task.taskTitle
-    //                 )}{" "}
-    //               </td>
-    //               <td className={classes}>
-    //                 {" "}
-    //                 {task.isEditing ? (
-    //                   <input
-    //                     type="text"
-    //                     value={task.taskDescription}
-    //                     onChange={(e) =>
-    //                       InputChange(
-    //                         project.id,
-    //                         task.taskID,
-    //                         "taskDescription",
-    //                         e.target.value
-    //                       )
-    //                     }
-    //                   />
-    //                 ) : (
-    //                   task.taskDescription
-    //                 )}
-    //               </td>
-    //               <td className={classes}>{task.taskDueDate}</td>
-    //               <td className={classes}>
-    //                 {task.isEditing ? (
-    //                   <select
-    //                     value={task.taskStatus}
-    //                     onChange={(e) =>
-    //                       InputChange(
-    //                         project.id,
-    //                         task.taskID,
-    //                         "taskStatus",
-    //                         e.target.value
-    //                       )
-    //                     }
-    //                   >
-    //                     <option value="new">New</option>
-    //                     <option value="block">Block</option>
-    //                     <option value="done">Done</option>
-    //                     <option value="unsigned">Unsigned</option>
-    //                   </select>
-    //                 ) : (
-    //                   task.taskStatus
-    //                 )}
-    //               </td>
-    //               <td className={classes}>
-    //                 {task.isEditing ? (
-    //                   <button
-    //                     onClick={() =>
-    //                       saveTask(project.id, task.taskID, {
-    //                         isEditing: false,
-    //                       })
-    //                     }
-    //                     className="bg-green-500 text-white px-2 py-1 rounded-md hover:bg-green-600"
-    //                   >
-    //                     Save
-    //                   </button>
-    //                 ) : (
-    //                   <button
-    //                     onClick={() => editTask(project.id, task.taskID)}
-    //                     className="bg-blue-500 text-white px-2 py-1 rounded-md hover:bg-blue-600"
-    //                   >
-    //                     Edit
-    //                   </button>
-    //                 )}
-    //                 <button
-    //                   onClick={() => deleteTask(project.id, task.taskID)}
-    //                   className="bg-red-500 text-white px-2 py-1 rounded-md hover:bg-red-600 ml-2"
-    //                 >
-    //                   Delete
-    //                 </button>
-    //               </td>
-    //             </tr>
-    //           ))}
-    //         </tbody>
-    //       </table>
-    //     </div>
-    //   ))}
-    // </section>
   );
 }
 

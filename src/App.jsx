@@ -4,29 +4,42 @@ import NoProjectSelected from "./Components/NoProjectSelected";
 import RightSideBar from "./Components/RightSideBar";
 import SelectedProject from "./Components/SelectedProject";
 import { ProjectContext } from "./Contexts/ProjectContext";
-import { Dummy_Data } from "../Dummy_Data";
+
+
+const initalProject = {
+  projectSelectedID: undefined,
+  Projects: [
+    {
+      id: 45,
+      title: "react",
+      description: "it was good",
+      dueDate: "2001/5/6",
+      task: [],
+    },
+  ],
+};
+const getInitialState = () => {
+  const projectState = localStorage.getItem("Projects");
+  return projectState ? JSON.parse(projectState) : initalProject;
+};
 
 function App() {
-  const [projectState, setProjectState] = useState({
-    projectSelectedID: undefined,
-    Projects: [],
-  });
+  const [projectState, setProjectState] = useState(getInitialState);
+
   //**********************************Task Section Started**************************************
 
   //Adding Task
   function handleTaskCreated(tasks, projectID) {
     const updatedProjects = projectState.Projects.map((project) => {
       if (project.id === projectID) {
-        if (project.task === undefined)
-        {
-          console.log(project.task)
+        if (project.task === undefined) {
           return { ...project, task: [tasks] };
         }
         return { ...project, task: [...project.task, tasks] };
       }
       return project;
     });
-    console.log(updatedProjects);
+
     setProjectState({ ...projectState, Projects: updatedProjects });
   }
 
@@ -90,7 +103,7 @@ function App() {
     setProjectState({ ...projectState, Projects: updatedProjects });
   };
 
-  //**********************************Project Section Started**************************************
+  //**********************************|Project Section Started|**************************************
 
   function onProjectStart() {
     setProjectState((prevState) => {
@@ -133,50 +146,14 @@ function App() {
     });
   };
 
-  //***************************LocalStorage Section Started**********************************/
-
+  //***************************|LocalStorage Section Started|**********************************/
   useEffect(() => {
-    let projectData = localStorage.getItem("Projects");
+    localStorage.setItem("Projects", JSON.stringify(projectState));
+  }, [projectState]);
 
-    if (projectData) {
-      const formattedProjects = JSON.parse(projectData);
-
-      let projects;
-
-      if (formattedProjects) {
-        projects = [...formattedProjects, ...projectState.Projects];
-      } else {
-        projects = [...projectState.Projects];
-      }
-
-      const projectSet = new Set();
-      const uniqueProjects = projects.filter((project) => {
-        const projectID = project.id
-        const isUnique =!projectSet.has(projectID);
-        if (isUnique) {
-          projectSet.add(JSON.stringify(project));
-        }
-        return isUnique;
-      });
-
-      localStorage.setItem("Projects", JSON.stringify(uniqueProjects));
-    } else {
-      localStorage.setItem("Projects", JSON.stringify([]));
-    }
-  }, [projectState.Projects]);
-
-  // load project data
-  useEffect(() => {
-    const projectData = localStorage.getItem("Projects");
-
-    setProjectState((prevState) => ({
-      ...prevState,
-      Projects: JSON.parse(projectData),
-    }));
-  }, []);
   // ***********************************Selected Project*********************************
 
-  const selectedProject = projectState.Projects.find(
+  const selectedProject = (projectState.Projects || []).find(
     (project) => project.id === projectState.projectSelectedID
   );
 

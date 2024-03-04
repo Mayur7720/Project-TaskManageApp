@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { ProjectContext } from "../Contexts/ProjectContext";
 
 function LeftSideBar({ onStartClick }) {
-  const { Projects, onClickProjectList, onAddProject } =
+  const { Projects, onClickProjectList } =
     useContext(ProjectContext);
 
   const handleClick = (id) => {
@@ -14,7 +14,7 @@ function LeftSideBar({ onStartClick }) {
   }
 
   return (
-    <section className="bg-slate-950 w-1/4 h-screen rounded-tr-[3rem] py-4  ">
+    <section className="bg-slate-950 w-1/6 h-screen rounded-tr-[3rem] py-4  ">
       <h1 className="text-white font-anta  text-2xl font-semibold ml-16 mb-7">
         Your Projects
       </h1>

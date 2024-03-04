@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import  { useRef } from "react";
 import Input from "./Input";
 import { ProjectContext } from "../Contexts/ProjectContext";
 import { useContext } from "react";
@@ -35,11 +35,11 @@ function RightSideBar() {
           Oops... looks like you forgot to enter a value
         </p>
       </Modal>
-      <section className="bg-slate-600   w-3/4 h-screen  p-3 flex flex-col items-center ">
+      <section className="bg-slate-600  w-full h-screen  p-3 flex flex-col items-center ">
         <h2 className="font-bold  text-3xl text-slate-400 mb-4 font-customFont ">
           Project Details
         </h2>
-        <div className="bg-slate-700 w-3/4 rounded-md h-3/4 p-4 shadow-lg shadow-gray-950">
+        <div className="bg-slate-700 w-2/3 rounded-md h-3/4 p-4 shadow-lg shadow-gray-950">
           <h3 className="mb-2 font-serif text-2xl font-semibold text-stone-300 ">
             Create A Project
           </h3>
