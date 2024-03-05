@@ -19,6 +19,7 @@ function TaskTable({ Projects }) {
     onDeleteTask(projectID, taskID);
   };
 
+  
   function renderSwitch(param) {
     switch (param) {
       case "done":
