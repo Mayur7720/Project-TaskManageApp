@@ -5,7 +5,6 @@ import RightSideBar from "./Components/RightSideBar";
 import SelectedProject from "./Components/SelectedProject";
 import { ProjectContext } from "./Contexts/ProjectContext";
 
-
 const initalProject = {
   projectSelectedID: undefined,
   Projects: [
@@ -146,7 +145,16 @@ function App() {
     });
   };
 
-  //***************************|LocalStorage Section Started|**********************************/
+  const handleCancel = () => {
+    setProjectState((prevProjectsState) => {
+      return {
+        ...prevProjectsState,
+        projectSelectedID: undefined,
+      };
+    });
+  };
+
+  //*********************************|LocalStorage Section Started|**********************************/
   useEffect(() => {
     localStorage.setItem("Projects", JSON.stringify(projectState));
   }, [projectState]);
@@ -161,7 +169,7 @@ function App() {
 
   let content = <SelectedProject project={selectedProject} />;
   if (projectState.projectSelectedID === null) {
-    content = <RightSideBar />;
+    content = <RightSideBar onCancel={handleCancel} />;
   } else if (projectState.projectSelectedID === undefined) {
     content = <NoProjectSelected onStartClick={onProjectStart} />;
   }
@@ -181,7 +189,7 @@ function App() {
   };
   return (
     <ProjectContext.Provider value={context}>
-      <section className="bg-slate-900 w-full h-screen flex">
+      <section className=" bg-slate-600 w-full h-screen flex">
         <LeftSideBar onStartClick={onProjectStart} />
         {content}
       </section>

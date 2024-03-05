@@ -1,9 +1,9 @@
-import  { useRef } from "react";
+import { useRef } from "react";
 import Input from "./Input";
 import { ProjectContext } from "../Contexts/ProjectContext";
 import { useContext } from "react";
 import Modal from "./Modal";
-function RightSideBar() {
+function RightSideBar({ onCancel }) {
   const { onAddProject } = useContext(ProjectContext);
 
   const Reftitle = useRef();
@@ -24,7 +24,7 @@ function RightSideBar() {
       modal.current.open();
       return;
     }
-    onAddProject({ title, description, dueDate});
+    onAddProject({ title, description, dueDate });
   };
 
   return (
@@ -35,7 +35,7 @@ function RightSideBar() {
           Oops... looks like you forgot to enter a value
         </p>
       </Modal>
-      <section className="bg-slate-600  w-full h-screen  p-3 flex flex-col items-center ">
+      <section className="bg-slate-600  w-full h-screen  p-3 flex flex-col items-center select-none  ">
         <h2 className="font-bold  text-3xl text-slate-400 mb-4 font-customFont ">
           Project Details
         </h2>
@@ -52,6 +52,12 @@ function RightSideBar() {
             className="float-right mt-8 bg-green-600 text-md p-2 rounded text-white font-semibold hover:bg-green-700 shadow-sm shadow-black hover:shadow-none "
           >
             Add Project
+          </button>
+          <button
+            onClick={onCancel}
+            className="float-left mt-8 bg-red-600 text-md p-2 rounded text-white font-semibold hover:bg-red-700 shadow-sm shadow-black hover:shadow-none "
+          >
+            Cancel
           </button>
         </div>
       </section>

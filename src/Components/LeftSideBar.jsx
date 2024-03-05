@@ -14,7 +14,7 @@ function LeftSideBar({ onStartClick }) {
   }
 
   return (
-    <section className="bg-slate-950 w-1/6 h-screen rounded-tr-[3rem] py-4  ">
+    <section className="bg-slate-950 w-1/5 h-screen rounded-tr-[3rem] py-4  ">
       <h1 className="text-white font-anta  text-2xl font-semibold ml-16 mb-7">
         Your Projects
       </h1>

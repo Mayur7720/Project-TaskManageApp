@@ -30,6 +30,7 @@ function SelectedProject({ project }) {
     let taskID = Date.now();
     let taskStatus = enteredStatus.current.value;
     let isEditing = false;
+    const today = new Date().toISOString().split("T")[0];
 
     if (taskTitle.length < 5) {
       setError("Enter the Task title with Minimum 5 Character");
@@ -37,6 +38,8 @@ function SelectedProject({ project }) {
       setError("Please select both start and end dates of Task");
     } else if (new Date(taskStartDate) >= new Date(taskEndDate)) {
       setError("End date must be after start date");
+    } else if (taskStartDate <= today) {
+      setError("Start date must be after today.");
     } else if (taskDescription.length < 8) {
       setError("Enter task Description with minimum 8 character");
     } else if (taskStatus === "Not Selected") {
@@ -61,7 +64,7 @@ function SelectedProject({ project }) {
   };
 
   return (
-    <section className=" w-full  bg-slate-400 p-3 overflow-x-hidden ">
+    <section className=" w-full  bg-slate-600 p-3 overflow-x-hidden select-none ">
       <div className="w-full relative  ">
         <div className="bg-slate-300 h-2/5 w-3/4 ml-auto mr-auto p-4 rounded-xl mt-4 shadow-md shadow-black border-t-4 border-b-4 border-orange-500">
           <div className=" mt-6">
@@ -107,10 +110,10 @@ function SelectedProject({ project }) {
             {/* ******************|Task Form Started|********************* */}
 
             {newWindow && (
-              <section className="backdrop-blur-sm bg-stone-800/25 w-4/5 h-[35rem]  absolute top-1 left-[5.9rem] flex justify-center items-center rounded-xl z-50">
+              <section className="w-full backdrop-blur-sm bg-stone-400/25 h-[40rem]  absolute top-[-1rem] left-0 flex justify-center items-center rounded-xl z-50">
                 <div className="w-3/4 border-2 border-gray-500  ml-auto mr-auto  rounded-lg shadow-neutral-700  shadow-lg py-3 ">
                   <div className="border-b-gray-700 border-b-2 p-2 mb-4 flex justify-center items-center ">
-                    <h2 className="px-4 text-xl font-semibold font-mono underline underline-offset-4 hover:no-underline ">
+                    <h2 className="px-4 text-xl font-semibold font-mono underline underline-offset-4 hover:no-underline select-none">
                       Enter Task Details
                     </h2>
 
@@ -122,33 +125,33 @@ function SelectedProject({ project }) {
                     </button>
                   </div>
                   <div className="px-5  mb-3">
-                    <label className=" font-customFont font-semibold">
+                    <label className="  font-kode  font-bold select-none ">
                       Task Title :{" "}
                     </label>
 
                     <input
                       ref={enteredTitle}
                       type="text"
-                      className="w-full p-1 mt-1 rounded-lg outline-none focus:ring-green-700  ring-2 ring-transparent bg-zinc-300 "
+                      className="w-full p-1 mt-1 rounded-lg  outline-none focus:ring-zinc-800 select-none  ring-2 ring-transparent bg-zinc-300 "
                     />
                   </div>
                   <div className="px-5 mb-3">
-                    <label className="font-customFont font-semibold">
+                    <label className=" font-kode  font-bold select-none">
                       Description :{" "}
                     </label>
                     <input
                       ref={enteredDescription}
                       type="text"
-                      className="w-full p-1 mt-1   rounded-lg outline-none focus:ring-green-700  ring-2 ring-transparent bg-zinc-300"
+                      className="w-full p-1 mt-1   rounded-lg  outline-none focus:ring-zinc-800 select-none  ring-2 ring-transparent bg-zinc-300"
                     />
                   </div>
                   <div className="px-5 mb-3">
-                    <label className="font-customFont font-semibold">
+                    <label className=" font-kode  font-bold select-none">
                       Task Status :{" "}
                     </label>
                     <select
                       ref={enteredStatus}
-                      className=" w-full p-1 mt-1  rounded-lg outline-none focus:ring-green-700  ring-2 ring-transparent bg-zinc-300"
+                      className=" w-full p-1 mt-1  rounded-lg  outline-none focus:ring-zinc-800 select-none  ring-2 ring-transparent bg-zinc-300"
                     >
                       <option value="new">Not Selected</option>
                       <option value="new">New</option>
@@ -159,38 +162,38 @@ function SelectedProject({ project }) {
                     </select>
                   </div>
                   <div className="px-5 mb-3">
-                    <label className="font-customFont font-semibold">
+                    <label className=" font-kode  font-bold select-none">
                       Start Date :{" "}
                     </label>
                     <input
                       ref={enteredStartDate}
                       type="date"
-                      className="w-full p-1 mt-1  rounded-lg outline-none focus:ring-green-700  ring-2 ring-transparent bg-zinc-300"
+                      className="w-full p-1 mt-1  rounded-lg  outline-none focus:ring-zinc-800 select-none  ring-2 ring-transparent bg-zinc-300"
                     />
                   </div>
                   <div className="px-5 mb-3">
-                    <label className="font-customFont font-semibold">
+                    <label className=" font-kode  font-bold select-none">
                       End Date :{" "}
                     </label>
                     <input
                       ref={enteredEndDate}
                       type="date"
-                      className="w-full p-1 mt-1  rounded-lg outline-none focus:ring-green-700  ring-2 ring-transparent bg-zinc-300"
+                      className="w-full p-1 mt-1  rounded-lg  outline-none focus:ring-zinc-800 select-none  ring-2 ring-transparent bg-zinc-300"
                     />
                   </div>
                   <div className="text-center block">
                     <button
                       onClick={createTasks}
-                      className=" px-2 py-2 bg-green-600 text-white rounded font-semibold font-sans shadow-sm shadow-black  hover:shadow-none    hover:bg-green-700 duration-300"
+                      className=" px-2 py-2 bg-green-600 text-white rounded font-semibold font-sans shadow-sm shadow-black  hover:shadow-none hover:bg-green-700 duration-300"
                     >
                       Create Task
                     </button>
                   </div>
                   <div className="w-full text-center mt-4 ">
-                    <span className="bg-red-500 text-white font-mono ">
+                    <span className="bg-red-500 text-white font-mono rounded ">
                       {error}
                     </span>
-                    ;
+                    .
                   </div>
                 </div>
               </section>
