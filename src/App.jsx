@@ -190,7 +190,10 @@ function App() {
   return (
     <ProjectContext.Provider value={context}>
       <section className=" bg-slate-600 w-full h-screen flex">
-        <LeftSideBar onStartClick={onProjectStart} />
+        <LeftSideBar
+          onStartClick={onProjectStart}
+          selectedProjectId={projectState.projectSelectedID}
+        />
         {content}
       </section>
     </ProjectContext.Provider>

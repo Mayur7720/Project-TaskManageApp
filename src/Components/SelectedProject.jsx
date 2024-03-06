@@ -66,7 +66,7 @@ function SelectedProject({ project }) {
   return (
     <section className=" w-full  bg-slate-600 p-3 overflow-x-hidden select-none ">
       <div className="w-full relative  ">
-        <div className="bg-slate-300 h-2/5 w-3/4 ml-auto mr-auto p-4 rounded-xl mt-4 shadow-md shadow-black border-t-4 border-b-4 border-orange-500">
+        <div className="bg-slate-300 h-2/5 w-3/4 ml-auto mr-auto p-4 rounded-2xl mt-4 shadow-md shadow-black border-t-4 border-b-8 border-zinc-700">
           <div className=" mt-6">
             <div className=" mb-4 ">
               <span className="font-serif underline underline-offset-2 text-xl font-semibold">
@@ -94,13 +94,13 @@ function SelectedProject({ project }) {
               <div className="w-full block h-8 ">
                 <button
                   onClick={newTaskWindow}
-                  className="font-semibold shadow-neutral-600 shadow-md float-right  mr-8 bg-blue-700  text-white px-3 py-2 rounded border hover:bg-blue-800 hover:shadow-none transition ease-in"
+                  className="font-semibold shadow-neutral-600 shadow-md float-right  mr-8 bg-blue-700  text-white px-2 py-1 rounded border-2 border-transparent   hover:bg-blue-800  hover:border-blue-900 hover:shadow-none transition ease-in"
                 >
                   + New Task
                 </button>
                 <button
                   onClick={() => deleteProject(project.id)}
-                  className="font-semibold shadow-neutral-600 shadow-md float-right  mr-8 bg-red-600 text-white px-3 py-2 rounded border hover:bg-red-700 hover:shadow-none transition ease-in "
+                  className="font-semibold shadow-neutral-600 shadow-md float-right  mr-8 bg-red-600 text-white px-2 py-1 rounded border-2 border-transparent   hover:bg-red-700  hover:border-red-900 hover:shadow-none transition ease-in "
                 >
                   Delete
                 </button>

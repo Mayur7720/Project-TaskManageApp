@@ -1,9 +1,8 @@
 import { useContext } from "react";
 import { ProjectContext } from "../Contexts/ProjectContext";
 
-function LeftSideBar({ onStartClick }) {
-  const { Projects, onClickProjectList } =
-    useContext(ProjectContext);
+function LeftSideBar({ onStartClick, selectedProjectId }) {
+  const { Projects, onClickProjectList } = useContext(ProjectContext);
 
   const handleClick = (id) => {
     onClickProjectList(id);
@@ -29,16 +28,24 @@ function LeftSideBar({ onStartClick }) {
       <hr className="mt-3 mb-5" />
       <div>
         <ul className="text-center ml-auto  ">
-          {Projects.map((project, idx) => (
-            <li key={idx}>
-              <button
-                className={`w-3/4 text-white ml-auto mr-auto p-2 mb-4 text-center capitalize  rounded-xl font-mono border hover:bg-slate-900 hover:border-transparent`}
-                onClick={() => handleClick(project.id)}
-              >
-                {project.title}
-              </button>
-            </li>
-          ))}
+          {Projects.map((project, idx) => {
+            let cssClass = `w-3/4 text-white ml-auto mr-auto p-2 mb-4 text-center capitalize  rounded-xl font-mono border hover:bg-slate-900 hover:border-transparent`;
+            if (project.id === selectedProjectId) {
+              cssClass += " bg-slate-900 border-transparent";
+            } else {
+              cssClass += " text-white-400";
+            }
+            return (
+              <li key={idx}>
+                <button
+                  className={cssClass}
+                  onClick={() => handleClick(project.id)}
+                >
+                  {project.title}
+                </button>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </section>

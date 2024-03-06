@@ -1,10 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { ProjectContext } from "../Contexts/ProjectContext";
+
 function TaskTable({ Projects }) {
   const { onEditTask, onInputChange, onSaveTask, onDeleteTask } =
     useContext(ProjectContext);
 
-  let classes = "border-t  px-4 py-2 ";
+  let classes = "border-t  px-2 py-2 ";
 
   const InputChange = (projectID, taskID, field, value) => {
     onInputChange(projectID, taskID, field, value);
@@ -19,7 +20,6 @@ function TaskTable({ Projects }) {
     onDeleteTask(projectID, taskID);
   };
 
-  
   function renderSwitch(param) {
     switch (param) {
       case "done":
@@ -110,14 +110,14 @@ function TaskTable({ Projects }) {
                       }
                     />
                   ) : (
-                    Task.taskTitle
+                    <div className="font-semibold "> {Task.taskTitle}</div>
                   )}{" "}
                 </td>
                 <td className={classes}>
                   {" "}
                   {Task.isEditing ? (
-                    <input
-                      className="rounded-md bg-slate-300 text-center outline-none focus:ring-2 focus:ring-zinc-900 md:w-3/4"
+                    <textarea
+                      className="rounded-md bg-slate-300 text-center outline-none focus:ring-2 focus:ring-zinc-900 md:w-3/4 max-w-md resize-none"
                       type="text"
                       value={Task.taskDescription}
                       onChange={(e) =>
@@ -167,23 +167,23 @@ function TaskTable({ Projects }) {
                           isEditing: false,
                         })
                       }
-                      className="bg-green-500 text-white px-2 py-1 rounded-md hover:bg-green-600"
+                      className="bg-green-500 text-white px-2 py-1 rounded-md hover:bg-green-600 md:text-sm ml-2 md:mt-1"
                     >
                       Save
                     </button>
                   ) : (
                     <button
                       onClick={() => editTask(Projects.id, Task.taskID)}
-                      className="bg-blue-500 text-white px-2 py-1 rounded-md hover:bg-blue-600 md:text-sm"
+                      className="bg-blue-500 text-white px-2 py-1 rounded-md hover:bg-blue-600 md:text-sm ml-2 md:mt-1"
                     >
                       Edit
                     </button>
                   )}
                   <button
                     onClick={() => deleteTask(Projects.id, Task.taskID)}
-                    className="bg-red-500 text-white px-2 py-1 rounded-md hover:bg-red-600 ml-2 md:text-sm"
+                    className="bg-red-500  text-white px-2 py-1 rounded-md hover:bg-red-600  md:text-sm ml-2 md:mt-1"
                   >
-                    <span class="material-symbols-outlined">delete</span>
+                    delete
                   </button>
                 </td>
               </tr>

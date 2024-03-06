@@ -16,13 +16,13 @@ const Input = forwardRef(function Input(
       {!textarea ? (
         <input
           ref={ref}
-          className="w-full mb-4 p-1 bg-stone-300 rounded mt-1 text-md font-semibold  outline-none focus:ring-2 focus:ring-fuchsia-700 border-none"
+          className="w-full mb-4 p-1 bg-stone-300 rounded mt-1 text-md font-semibold  outline-none focus:ring-2 focus:ring-fuchsia-700  border-none"
           {...props}
         />
       ) : (
         <textarea
           ref={ref}
-          className="w-full mb-4 p-1  bg-stone-300 rounded mt-1 text-md font-semibold outline-none focus:ring-2 focus:ring-fuchsia-700 border-none"
+          className="w-full mb-4 p-1  bg-stone-300 rounded mt-1 text-md font-semibold outline-none focus:ring-2 focus:ring-fuchsia-700 border-none resize-none"
           {...props}
         />
       )}
