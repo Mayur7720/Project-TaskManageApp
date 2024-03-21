@@ -2,7 +2,7 @@ import React from "react";
 
 function NoProjectSelected({ onStartClick }) {
   return (
-    <section className="w-full bg-slate-600 h-screen m-auto  text-center flex flex-col gap-4 justify-center ">
+    <section className="bg-slate-600 w-full h-screen text-center flex flex-col gap-4 justify-center z-0">
       <h1 className="font-semibold text-center text-3xl text-slate-400">
         No Project Selected
       </h1>
